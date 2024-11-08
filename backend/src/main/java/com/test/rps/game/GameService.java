@@ -9,7 +9,6 @@ import com.test.rps.game.model.Choice;
 import com.test.rps.game.model.Outcome;
 import com.test.rps.game.model.dto.PlayerStrategyDTO;
 import com.test.rps.game.model.dto.RoundOutcomeDTO;
-import com.test.rps.metrics.MetricsService;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -24,10 +23,10 @@ public class GameService {
      */
     private final Random random;
 
-    private final MetricsService metricsService;
+    private final GameLogger gameLogger;
 
-    public GameService(@Value("${computer.seed}") long seed, MetricsService metricsService) {
-        this.metricsService = metricsService;
+    public GameService(@Value("${computer.seed}") long seed, GameLogger gameLogger) {
+        this.gameLogger = gameLogger;
         log.info("Game Service initialised with seed {}", seed);
         random = new Random(seed);
     }
@@ -36,7 +35,9 @@ public class GameService {
         Choice playerChoice = playerStrategy.getPlayerChoice();
         Choice computerChoice = nextComputerChoice();
         Outcome outcome = determineWinner(playerChoice, computerChoice);
-        metricsService.logPlay(playerChoice, computerChoice);
+        if (gameLogger != null) {
+            gameLogger.logPlay(playerChoice, computerChoice);
+        }
         return new RoundOutcomeDTO(playerChoice, computerChoice, outcome);
     }
 

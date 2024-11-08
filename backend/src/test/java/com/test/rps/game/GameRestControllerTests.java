@@ -1,10 +1,10 @@
 package com.test.rps.game;
 
+import static org.hamcrest.core.StringContains.containsString;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-import static org.hamcrest.core.StringContains.*;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,14 +18,11 @@ import com.test.rps.game.model.Choice;
 import com.test.rps.game.model.Outcome;
 import com.test.rps.game.model.dto.PlayerStrategyDTO;
 import com.test.rps.game.model.dto.RoundOutcomeDTO;
-import com.test.rps.metrics.MetricsService;
 
-@WebMvcTest
+@WebMvcTest(GameRestController.class)
 class GameRestControllerTests {
     @MockBean
     private GameService gameService;
-    @MockBean
-    private MetricsService metricsService;
 
     @Autowired
     private MockMvc mockMvc;

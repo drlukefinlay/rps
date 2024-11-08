@@ -4,22 +4,17 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.Mock;
-import org.mockito.junit.jupiter.MockitoExtension;
 
 import com.test.rps.game.model.Choice;
 import com.test.rps.game.model.Outcome;
 import com.test.rps.game.model.dto.PlayerStrategyDTO;
-import com.test.rps.metrics.MetricsService;
 
-@ExtendWith(MockitoExtension.class)
 class GameServiceTests {
     private static GameService gameService;
 
     @BeforeAll
-    static void init(@Mock MetricsService metricsService) {
-        gameService = new GameService(245l, metricsService);
+    static void init() {
+        gameService = new GameService(245l, null);
     }
 
     @Test
