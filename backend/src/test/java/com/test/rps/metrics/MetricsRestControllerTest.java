@@ -14,8 +14,6 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.web.servlet.MockMvc;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.test.rps.game.model.Choice;
-import com.test.rps.metrics.model.dto.MetricCountDTO;
 import com.test.rps.metrics.model.dto.MetricsDTO;
 
 @WebMvcTest(MetricsRestController.class)
@@ -32,8 +30,9 @@ class MetricsRestControllerTest {
     @Test
     void testBlankMetrics() throws Exception {
         MetricsDTO metrics = new MetricsDTO();
-        metrics.setPlayCount(999);
-        metrics.setCounts(Collections.singletonList(new MetricCountDTO(Choice.ROCK, Choice.PAPER, 999)));
+        metrics.setTotalCount(999);
+        metrics.setPlayerCounts(Collections.emptyMap());
+        
         when(metricsService.getMetrics()).thenReturn(metrics);
 
         mockMvc.perform(get("/api/metrics")).andExpect(status().isOk())

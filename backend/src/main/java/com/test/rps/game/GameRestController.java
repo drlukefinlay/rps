@@ -1,5 +1,6 @@
 package com.test.rps.game;
 
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,6 +20,7 @@ public class GameRestController {
     private final GameService gameService;
 
     @PostMapping(path = "/play")
+    @CrossOrigin
     public RoundOutcomeDTO playRound(@Valid @RequestBody PlayerStrategyDTO strategy) {
         return gameService.processGame(strategy);
     }
