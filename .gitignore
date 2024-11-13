@@ -39,3 +39,4 @@ build/
 
 ### RPS Specific ###
 backend/h2database.mv.db
+backend/src/main/resources/static/
