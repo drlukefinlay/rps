@@ -11,7 +11,7 @@ export class RpsService {
   constructor(private http: HttpClient) {}
 
   public play(strategy: PlayerStrategyDTO): Observable<RoundOutcomeDTO> {
-    const url = 'http://localhost:8080/api/play';
+    const url = '/api/play';
     return this.http.post<RoundOutcomeDTO>(url, strategy);
   }
 }
