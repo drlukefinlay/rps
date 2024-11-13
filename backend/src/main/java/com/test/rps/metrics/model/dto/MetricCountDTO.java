@@ -1,16 +1,15 @@
 package com.test.rps.metrics.model.dto;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import com.test.rps.game.model.Choice;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
-@AllArgsConstructor
 public class MetricCountDTO {
-    private Choice player;
-    private Choice computer;
-    private long count;
+    private Map<Choice, Long> computerCounts = new HashMap<Choice, Long>();
 }

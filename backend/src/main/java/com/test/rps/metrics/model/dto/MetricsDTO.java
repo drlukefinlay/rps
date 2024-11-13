@@ -1,6 +1,8 @@
 package com.test.rps.metrics.model.dto;
 
-import java.util.List;
+import java.util.Map;
+
+import com.test.rps.game.model.Choice;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -8,7 +10,6 @@ import lombok.Setter;
 @Getter
 @Setter
 public class MetricsDTO {
-    private long playCount;
-    private List<MetricCountDTO> counts;
-
+    private long totalCount;
+    private Map<Choice, MetricCountDTO> playerCounts;
 }

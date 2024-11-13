@@ -1,7 +1,8 @@
 package com.test.rps.metrics;
 
-import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.stereotype.Service;
 
@@ -23,6 +24,7 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @RequiredArgsConstructor
 public class MetricsService implements GameLogger {
+    private final Choice[] CHOICES = Choice.values();
     private final PlayRepository playRepository;
 
     public void logPlay(Choice playerChoice, Choice computerChoice) {
@@ -32,8 +34,8 @@ public class MetricsService implements GameLogger {
 
     public MetricsDTO getMetrics() {
         MetricsDTO metrics = new MetricsDTO();
-        metrics.setPlayCount(playRepository.count());
-        metrics.setCounts(calculateCounts());
+        metrics.setTotalCount(playRepository.count());
+        metrics.setPlayerCounts(calculateCounts());
         return metrics;
     }
 
@@ -43,14 +45,18 @@ public class MetricsService implements GameLogger {
      * could keep a transient object that is updated per play and re-created from
      * the database on startup. Or persisted on changes.
      */
-    private List<MetricCountDTO> calculateCounts() {
-        List<MetricCountDTO> counts = new ArrayList<>(9);
+    private Map<Choice, MetricCountDTO> calculateCounts() {
+        HashMap<Choice, MetricCountDTO> playerCounts = new HashMap<>();
+        for (Choice playerChoice: CHOICES) {
+            playerCounts.put(playerChoice, new MetricCountDTO());
+        }
+        
         List<PlayCount> playCounts = playRepository.countTotalsByPlayerAndComputer();
 
         for (PlayCount playCount : playCounts) {
-            counts.add(new MetricCountDTO(playCount.getPlayer(), playCount.getComputer(), playCount.getTotal()));
+            playerCounts.get(playCount.getPlayer()).getComputerCounts().put(playCount.getComputer(), playCount.getTotal());
         }
 
-        return counts;
+        return playerCounts;
     }
 }

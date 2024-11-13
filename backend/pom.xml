@@ -14,16 +14,13 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<name>rps</name>
 	<description>Rock Paper Scissors</description>
-	<licenses>
-		<license />
-	</licenses>
-	<developers>
-		<developer />
-	</developers>
 	<properties>
 		<java.version>21</java.version>
 	</properties>
+
+
 	<dependencies>
+
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-actuator</artifactId>
@@ -70,6 +67,21 @@
 							<artifactId>lombok</artifactId>
 						</exclude>
 					</excludes>
+				</configuration>
+			</plugin>
+
+			<plugin>
+				<groupId>cz.habarta.typescript-generator</groupId>
+				<artifactId>typescript-generator-maven-plugin</artifactId>
+				<version>3.2.1263</version>
+				<configuration>
+					<outputKind>module</outputKind>
+					<jsonLibrary>jackson2</jsonLibrary>
+					<outputFile>../frontend/src/app/models/models.d.ts</outputFile>
+					<classPatterns>
+						<pattern>com.test.rps.metrics.model.dto.*DTO</pattern>
+						<patten>com.test.rps.game.model.dto.*DTO</patten>
+					</classPatterns>
 				</configuration>
 			</plugin>
 		</plugins>
