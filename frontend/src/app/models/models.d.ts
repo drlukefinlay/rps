@@ -1,6 +1,6 @@
 /* tslint:disable */
 /* eslint-disable */
-// Generated using typescript-generator version 3.2.1263 on 2024-11-11 17:50:26.
+// Generated using typescript-generator version 3.2.1263 on 2024-11-13 11:47:55.
 
 export interface PlayerStrategyDTO {
     playerChoice: Choice;
@@ -19,6 +19,13 @@ export interface MetricCountDTO {
 export interface MetricsDTO {
     totalCount: number;
     playerCounts: { [P in Choice]?: MetricCountDTO };
+}
+
+export interface PlayDTO {
+    id: number;
+    timestamp: Date;
+    player: Choice;
+    computer: Choice;
 }
 
 export type Choice = "ROCK" | "PAPER" | "SCISSORS";

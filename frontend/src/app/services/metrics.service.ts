@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { MetricsDTO } from '../models/models';
+import { MetricsDTO, PlayDTO } from '../models/models';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -14,4 +14,8 @@ export class MetricsService {
     return this.http.get<MetricsDTO>('http://localhost:8080/api/metrics');
   };
 
+  //It would be easy to add pagination using the parameters here...
+  public getPlays(): Observable<PlayDTO[]> {
+    return this.http.get<PlayDTO[]>('http://localhost:8080/api/plays');
+  };
 }

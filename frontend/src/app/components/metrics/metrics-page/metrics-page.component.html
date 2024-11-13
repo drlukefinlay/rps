@@ -7,8 +7,11 @@
             </button>
         </div>
 
-        @if (errorMessage) {
-            <div class="alert alert-danger mt-2" role="alert">{{ errorMessage }}</div>
+        @if (metricsErrorMessage) {
+            <div class="alert alert-danger mt-2" role="alert">{{ metricsErrorMessage }}</div>
+        }
+        @if (playsErrorMessage) {
+            <div class="alert alert-danger mt-2" role="alert">{{ playsErrorMessage }}</div>
         }
 
         @if (metrics | async; as metrics) {
@@ -47,6 +50,32 @@
                         <td>{{metrics.playerCounts.SCISSORS?.computerCounts?.PAPER}}</td>
                         <td>{{metrics.playerCounts.SCISSORS?.computerCounts?.SCISSORS}}</td>
                     </tr>
+                </tbody>
+            </table>
+        }
+
+        @if (plays | async; as plays) {
+            <h5>Most recent plays:</h5>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th scope="col">ID</th>
+                        <th scope="col">Player</th>
+                        <th scope="col">Computer</th>
+                        <th scope="col">Time</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @for (play of plays; track play.id) {
+                    <tr>
+                        <td>{{play.id}}</td>
+                        <td>{{play.player}}</td>
+                        <td>{{play.computer}}</td>
+                        <td>{{play.timestamp | date:'short'}}</td>
+                    </tr>
+                    }@empty {
+                        <td colspan="4">Go and play the game!</td>
+                    }
                 </tbody>
             </table>
         }

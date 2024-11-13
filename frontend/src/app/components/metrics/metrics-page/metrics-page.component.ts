@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { catchError, finalize, Observable, of } from 'rxjs';
-import { MetricsDTO } from '../../../models/models';
+import { MetricsDTO, PlayDTO } from '../../../models/models';
 import { MetricsService } from '../../../services/metrics.service';
 
 @Component({
@@ -13,23 +13,33 @@ import { MetricsService } from '../../../services/metrics.service';
 })
 export class MetricsPageComponent {
   protected metrics?: Observable<MetricsDTO | undefined>;
-  protected errorMessage?: string;
-  protected loading: boolean = false;
+  protected metricsErrorMessage?: string;
+  protected playsErrorMessage?: string;
+  protected loading: number = 0;
+  protected plays?: Observable<PlayDTO[] | undefined>;
 
   constructor(private metricsService: MetricsService){
     this.refresh();
   }
 
-  protected refresh() {
-    this.loading = true;
-    this.errorMessage = undefined;
+  protected refresh(){
+    this.loading = 2;
+    this.metricsErrorMessage = this.playsErrorMessage = undefined;
+    
     this.metrics = this.metricsService.getMetrics().pipe(
       catchError((err: any) => {
-        this.errorMessage = err.message || err.toString();
-        return of(undefined); // reset message to placeholder
+        this.metricsErrorMessage = err.message || err.toString();
+        return of(undefined);
       }),
-      finalize(() => this.loading = false)
+      finalize(() => this.loading--)
+    );
+
+    this.plays = this.metricsService.getPlays().pipe(
+      catchError((err: any) => {
+        this.playsErrorMessage = err.message || err.toString();
+        return of(undefined);
+      }),
+      finalize(() => this.loading--)
     );
   }
-  
 }
