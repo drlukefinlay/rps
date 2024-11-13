@@ -27,7 +27,7 @@ import com.test.rps.metrics.model.dto.PlayDTO;
  * useMainMethod just means we have 100% test coverage
  */
 
-@SpringBootTest(webEnvironment = WebEnvironment.NONE, useMainMethod = UseMainMethod.WHEN_AVAILABLE)
+@SpringBootTest(webEnvironment = WebEnvironment.NONE, useMainMethod = UseMainMethod.WHEN_AVAILABLE, classes = {RpsApplication.class})
 @ActiveProfiles(profiles = "test")
 class RpsApplicationTests {
 
