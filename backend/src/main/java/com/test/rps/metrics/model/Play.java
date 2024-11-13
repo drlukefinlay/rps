@@ -20,13 +20,6 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 public class Play {
-
-    public Play(Choice player, Choice computer) {
-        this.player = player;
-        this.computer = computer;
-        this.timestamp = Instant.now();
-    }
-
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
@@ -36,4 +29,10 @@ public class Play {
     private Choice player;
 
     private Choice computer;
+    
+    public Play(Choice player, Choice computer) {
+        this.player = player;
+        this.computer = computer;
+        this.timestamp = Instant.now();
+    }
 }
