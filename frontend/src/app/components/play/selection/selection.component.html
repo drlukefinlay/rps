@@ -1,0 +1,6 @@
+
+<div [ngClass]="{'reverse': reverse}">
+    <img src="/images/paper.svg" class="img-fluid" [hidden]="playing || choice !== 'PAPER'">
+    <img src="/images/scissors.svg" class="img-fluid" [hidden]="playing || choice !== 'SCISSORS'">
+    <img src="/images/rock.svg" class="img-fluid" [ngClass]="{'up-down': playing}" [hidden]="!playing && choice !== 'ROCK' && choice !== undefined">
+</div>

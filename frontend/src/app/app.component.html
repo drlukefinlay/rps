@@ -1,0 +1,22 @@
+<nav class="navbar navbar-expand-lg bg-dark border-bottom border-body" data-bs-theme="dark">
+    <div class="container-fluid">
+        <a class="navbar-brand">RPS</a>
+        <button (click)="toggleNav()" class="navbar-toggler" type="button" aria-controls="navbarNav" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="navbar-collapse" [ngClass]="{'collapse': navExpanded}">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" routerLink="/" [routerLinkActiveOptions]="{ exact: true }" routerLinkActive="active" ariaCurrentWhenActive="page">Play</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" routerLink="/metrics" routerLinkActive="active" ariaCurrentWhenActive="page">Metrics</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div class="container mt-5">
+    <router-outlet></router-outlet>
+</div>

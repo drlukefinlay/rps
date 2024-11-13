@@ -1,0 +1,19 @@
+.reverse {
+    transform: scaleX(-1);
+}
+
+.up-down {
+    opacity: 0.5;
+    animation: MoveUpDown 333ms ease-in 3;
+}
+
+@keyframes MoveUpDown {
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-15%);
+    }
+}
