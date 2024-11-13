@@ -38,6 +38,7 @@ public class GameService {
         if (gameLogger != null) {
             gameLogger.logPlay(playerChoice, computerChoice);
         }
+        log.info("Player played {}, computer played {} with outcome {}", playerChoice, computerChoice, outcome);
         return new RoundOutcomeDTO(playerChoice, computerChoice, outcome);
     }
 
